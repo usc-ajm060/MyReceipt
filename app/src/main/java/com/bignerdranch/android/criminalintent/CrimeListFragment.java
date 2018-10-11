@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,11 +17,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    private static final int REQUEST_ERROR = 0;
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
@@ -50,14 +55,25 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateUI();
-
-
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        updateUI();
+//
+//        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+//        int errorCode = apiAvailability.isGooglePlayServicesAvailable(this);
+//
+//        if (errorCode != ConnectionResult.SUCCESS) {
+//            Dialog errorDialog = apiAvailability.getErrorDialog(this, errorCode, REQUEST_ERROR,
+//                    new DialogInterface.OnCancelListener() {
+//                        @Override
+//                        public void onCancel(DialogInterface dialog) {
+//                            finish();
+//                        }
+//                    });
+//            errorDialog.show();
+//        }
+//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
