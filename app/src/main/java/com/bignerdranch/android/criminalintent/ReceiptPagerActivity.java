@@ -19,16 +19,18 @@ import java.util.UUID;
 
 public class ReceiptPagerActivity extends AppCompatActivity {
 
-    private static final String EXTRA_CRIME_ID =
+
+
+    private static final String EXTRA_RECEIPT_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
     private static final int REQUEST_ERROR = 0;
 
     private ViewPager mViewPager;
-    private List<Receipt> mCrimes;
+    private List<Receipt> mReceipts;
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, ReceiptPagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_RECEIPT_ID, crimeId);
         return intent;
     }
 
@@ -37,29 +39,30 @@ public class ReceiptPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipt_pager);
 
+
         UUID crimeId = (UUID) getIntent()
-                .getSerializableExtra(EXTRA_CRIME_ID);
+                .getSerializableExtra(EXTRA_RECEIPT_ID);
 
-        mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.receipt_view_pager);
 
-        mCrimes = ReceiptLab.get(this).getCrimes();
+        mReceipts = ReceiptLab.get(this).getReceipts();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
-                Receipt crime = mCrimes.get(position);
+                Receipt crime = mReceipts.get(position);
                 return ReceiptFragment.newInstance(crime.getId());
             }
 
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mReceipts.size();
             }
         });
 
-        for (int i = 0; i < mCrimes.size(); i++) {
-            if (mCrimes.get(i).getId().equals(crimeId)) {
+        for (int i = 0; i < mReceipts.size(); i++) {
+            if (mReceipts.get(i).getId().equals(crimeId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

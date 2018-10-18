@@ -41,7 +41,7 @@ public class ReceiptLab {
         mDatabase.insert(ReceiptTable.NAME, null, values);
     }
 
-    public List<Receipt> getCrimes() {
+    public List<Receipt> getReceipts() {
         List<Receipt> crimes = new ArrayList<>();
         ReceiptCursorWrapper cursor = queryCrimes(null, null);
         try {
