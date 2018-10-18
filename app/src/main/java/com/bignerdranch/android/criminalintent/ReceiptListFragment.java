@@ -22,8 +22,8 @@ public class ReceiptListFragment extends Fragment {
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
     private static final int REQUEST_ERROR = 0;
 
-    private RecyclerView mCrimeRecyclerView;
-    private CrimeAdapter mAdapter;
+    private RecyclerView mReceiptRecyclerView;
+    private ReceiptAdapter mAdapter;
     private boolean mSubtitleVisible;
 
     @Override
@@ -37,9 +37,9 @@ public class ReceiptListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_receipt_list, container, false);
 
-        mCrimeRecyclerView = (RecyclerView) view
+        mReceiptRecyclerView = (RecyclerView) view
                 .findViewById(R.id.crime_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mReceiptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -105,8 +105,8 @@ public class ReceiptListFragment extends Fragment {
     }
 
     private void updateSubtitle() {
-        ReceiptLab crimeLab = ReceiptLab.get(getActivity());
-        int crimeCount = crimeLab.getReceipts().size();
+        ReceiptLab receiptLab = ReceiptLab.get(getActivity());
+        int crimeCount = receiptLab.getReceipts().size();
         String subtitle = getString(R.string.subtitle_format, crimeCount);
 
         if (!mSubtitleVisible) {
@@ -118,14 +118,14 @@ public class ReceiptListFragment extends Fragment {
     }
 
     private void updateUI() {
-        ReceiptLab crimeLab = ReceiptLab.get(getActivity());
-        List<Receipt> crimes = crimeLab.getReceipts();
+        ReceiptLab receiptLab = ReceiptLab.get(getActivity());
+        List<Receipt> receipts = receiptLab.getReceipts();
 
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mAdapter = new ReceiptAdapter(receipts);
+            mReceiptRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setCrimes(crimes);
+            mAdapter.setReceipts(receipts);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -135,7 +135,7 @@ public class ReceiptListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        private Receipt mCrime;
+        private Receipt mReceipt;
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
@@ -150,25 +150,25 @@ public class ReceiptListFragment extends Fragment {
             mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
         }
 
-        public void bind(Receipt crime) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
-            mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+        public void bind(Receipt receipt) {
+            mReceipt = receipt;
+            mTitleTextView.setText(mReceipt.getTitle());
+            mDateTextView.setText(mReceipt.getDate().toString());
+            mSolvedImageView.setVisibility(receipt.isSolved() ? View.VISIBLE : View.GONE);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = ReceiptPagerActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = ReceiptPagerActivity.newIntent(getActivity(), mReceipt.getId());
             startActivity(intent);
         }
     }
 
-    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+    private class ReceiptAdapter extends RecyclerView.Adapter<CrimeHolder> {
 
         private List<Receipt> mCrimes;
 
-        public CrimeAdapter(List<Receipt> crimes) {
+        public ReceiptAdapter(List<Receipt> crimes) {
             mCrimes = crimes;
         }
 
@@ -189,7 +189,7 @@ public class ReceiptListFragment extends Fragment {
             return mCrimes.size();
         }
 
-        public void setCrimes(List<Receipt> crimes) {
+        public void setReceipts(List<Receipt> crimes) {
             mCrimes = crimes;
         }
     }
