@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.bignerdranch.android.criminalintent.Receipt;
 import com.bignerdranch.android.criminalintent.database.ReceiptDbSchema.ReceiptTable;
 
 public class ReceiptBaseHelper extends SQLiteOpenHelper {
@@ -21,6 +22,7 @@ public class ReceiptBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 ReceiptTable.Cols.UUID + ", " +
                 ReceiptTable.Cols.TITLE + ", " +
+                //ReceiptTable.Cols.SHOP + ", " +
                 ReceiptTable.Cols.DATE + ", " +
                 ReceiptTable.Cols.SOLVED + ", " +
                 ReceiptTable.Cols.SUSPECT +

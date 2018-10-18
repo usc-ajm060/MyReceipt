@@ -7,6 +7,7 @@ public class Receipt {
 
     private UUID mId;
     private String mTitle;
+    //private String mShopName;
     private Date mDate;
     private boolean mSolved;
     private String mSuspect;
@@ -34,6 +35,7 @@ public class Receipt {
 
         mTitle = title;
     }
+
 
     public Date getDate() {
 

@@ -45,6 +45,7 @@ public class ReceiptFragment extends Fragment {
     private Receipt mReceipt;
     private File mPhotoFile;
     private EditText mTitleField;
+    private EditText mShopName;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
     private Button mReportButton;
@@ -93,6 +94,7 @@ public class ReceiptFragment extends Fragment {
 
             }
         });
+
 
         mDateButton = (Button) v.findViewById(R.id.receipt_date);
         updateDate();

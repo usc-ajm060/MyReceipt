@@ -47,7 +47,7 @@ public class ReceiptLab {
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                crimes.add(cursor.getCrime());
+                crimes.add(cursor.getReceipt());
                 cursor.moveToNext();
             }
         } finally {
@@ -66,7 +66,7 @@ public class ReceiptLab {
                 return null;
             }
             cursor.moveToFirst();
-            return cursor.getCrime();
+            return cursor.getReceipt();
         } finally {
             cursor.close();
         }
@@ -102,6 +102,7 @@ public class ReceiptLab {
         ContentValues values = new ContentValues();
         values.put(UUID, crime.getId().toString());
         values.put(TITLE, crime.getTitle());
+        //values.put(SHOP, crime.getShopName());
         values.put(DATE, crime.getDate().getTime());
         values.put(SOLVED, crime.isSolved() ? 1 : 0);
         values.put(ReceiptTable.Cols.SUSPECT, crime.getSuspect());
