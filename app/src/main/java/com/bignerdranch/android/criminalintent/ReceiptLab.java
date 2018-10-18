@@ -5,47 +5,45 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.bignerdranch.android.criminalintent.database.CrimeBaseHelper;
-import com.bignerdranch.android.criminalintent.database.CrimeCursorWrapper;
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema;
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable;
+import com.bignerdranch.android.criminalintent.database.ReceiptBaseHelper;
+import com.bignerdranch.android.criminalintent.database.ReceiptCursorWrapper;
+import com.bignerdranch.android.criminalintent.database.ReceiptDbSchema.ReceiptTable;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable.*;
-import static com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable.Cols.*;
+import static com.bignerdranch.android.criminalintent.database.ReceiptDbSchema.ReceiptTable.Cols.*;
 
-public class CrimeLab {
-    private static CrimeLab sCrimeLab;
+public class ReceiptLab {
+    private static ReceiptLab sCrimeLab;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static CrimeLab get(Context context) {
+    public static ReceiptLab get(Context context) {
         if (sCrimeLab == null) {
-            sCrimeLab = new CrimeLab(context);
+            sCrimeLab = new ReceiptLab(context);
         }
 
         return sCrimeLab;
     }
 
-    private CrimeLab(Context context) {
+    private ReceiptLab(Context context) {
         mContext = context.getApplicationContext();
-        mDatabase = new CrimeBaseHelper(mContext)
+        mDatabase = new ReceiptBaseHelper(mContext)
                 .getWritableDatabase();
 
     }
 
-    public void addCrime(Crime c) {
+    public void addCrime(Receipt c) {
         ContentValues values = getContentValues(c);
-        mDatabase.insert(CrimeTable.NAME, null, values);
+        mDatabase.insert(ReceiptTable.NAME, null, values);
     }
 
-    public List<Crime> getCrimes() {
-        List<Crime> crimes = new ArrayList<>();
-        CrimeCursorWrapper cursor = queryCrimes(null, null);
+    public List<Receipt> getCrimes() {
+        List<Receipt> crimes = new ArrayList<>();
+        ReceiptCursorWrapper cursor = queryCrimes(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -58,9 +56,9 @@ public class CrimeLab {
         return crimes;
     }
 
-    public Crime getCrime(UUID id) {
-        CrimeCursorWrapper cursor = queryCrimes(
-                CrimeTable.Cols.UUID + " = ?",
+    public Receipt getReceipt(UUID id) {
+        ReceiptCursorWrapper cursor = queryCrimes(
+                ReceiptTable.Cols.UUID + " = ?",
                 new String[]{id.toString()}
         );
         try {
@@ -74,22 +72,22 @@ public class CrimeLab {
         }
     }
 
-    public File getPhotoFile(Crime crime) {
+    public File getPhotoFile(Receipt crime) {
         File filesDir = mContext.getFilesDir();
         return new File(filesDir, crime.getPhotoFilename());
     }
 
-    public void updateCrime(Crime crime) {
+    public void updateReceipt(Receipt crime) {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
-        mDatabase.update(CrimeTable.NAME, values,
-                CrimeTable.Cols.UUID + " = ?",
+        mDatabase.update(ReceiptTable.NAME, values,
+                ReceiptTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
     }
 
-    private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
+    private ReceiptCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
-                CrimeTable.NAME,
+                ReceiptTable.NAME,
                 null, // Columns - null selects all columns
                 whereClause,
                 whereArgs,
@@ -97,16 +95,16 @@ public class CrimeLab {
                 null, // having
                 null  // orderBy
         );
-        return new CrimeCursorWrapper(cursor);
+        return new ReceiptCursorWrapper(cursor);
     }
 
-    private static ContentValues getContentValues(Crime crime) {
+    private static ContentValues getContentValues(Receipt crime) {
         ContentValues values = new ContentValues();
         values.put(UUID, crime.getId().toString());
         values.put(TITLE, crime.getTitle());
         values.put(DATE, crime.getDate().getTime());
         values.put(SOLVED, crime.isSolved() ? 1 : 0);
-        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
+        values.put(ReceiptTable.Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }

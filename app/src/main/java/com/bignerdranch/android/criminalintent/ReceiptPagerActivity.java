@@ -17,17 +17,17 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends AppCompatActivity {
+public class ReceiptPagerActivity extends AppCompatActivity {
 
     private static final String EXTRA_CRIME_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
     private static final int REQUEST_ERROR = 0;
 
     private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    private List<Receipt> mCrimes;
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
+        Intent intent = new Intent(packageContext, ReceiptPagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
@@ -35,21 +35,21 @@ public class CrimePagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
+        setContentView(R.layout.activity_receipt_pager);
 
         UUID crimeId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_CRIME_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
 
-        mCrimes = CrimeLab.get(this).getCrimes();
+        mCrimes = ReceiptLab.get(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+                Receipt crime = mCrimes.get(position);
+                return ReceiptFragment.newInstance(crime.getId());
             }
 
             @Override
