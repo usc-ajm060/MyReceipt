@@ -22,7 +22,7 @@ public class ReceiptBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 ReceiptTable.Cols.UUID + ", " +
                 ReceiptTable.Cols.TITLE + ", " +
-                //ReceiptTable.Cols.SHOP + ", " +
+                ReceiptTable.Cols.SHOP + ", " +
                 ReceiptTable.Cols.DATE + ", " +
                 ReceiptTable.Cols.SOLVED + ", " +
                 ReceiptTable.Cols.SUSPECT +
