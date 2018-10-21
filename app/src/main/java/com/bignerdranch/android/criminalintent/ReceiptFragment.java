@@ -45,7 +45,7 @@ public class ReceiptFragment extends Fragment {
     private Receipt mReceipt;
     private File mPhotoFile;
     private EditText mTitleField;
-    private EditText mShopName;
+    private EditText mShop;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
     private Button mReportButton;
@@ -79,6 +79,25 @@ public class ReceiptFragment extends Fragment {
         mTitleField = (EditText) v.findViewById(R.id.receipt_title);
         mTitleField.setText(mReceipt.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mReceipt.setTitle(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mShop = (EditText) v.findViewById(R.id.receipt_title);
+        mShop.setText(mReceipt.getTitle());
+        mShop.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

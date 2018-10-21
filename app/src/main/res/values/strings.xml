@@ -2,7 +2,7 @@
     <string name="app_name">MyReceipt</string>
     <string name="receipt_title_hint">Enter a title for the receipt.</string>
     <string name="receipt_title_label">Title</string>
-    <string name="shop_name">Shop name</string>
+    <string name="shop">Shop</string>
     <string name="receipt_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of receipt:</string>

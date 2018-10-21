@@ -50,11 +50,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/receipt_title_hint" />
 
-            <!--<EditText-->
-                <!--android:id="@+id/shop_name"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="@string/shop_name" />-->
+            <EditText
+                android:id="@+id/shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop" />
 
         </LinearLayout>
     </LinearLayout>
