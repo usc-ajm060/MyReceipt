@@ -50,11 +50,17 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/receipt_title_hint" />
 
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop" />
+
             <EditText
                 android:id="@+id/shop_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/shop" />
+                android:hint="@string/shop_hint" />
 
         </LinearLayout>
     </LinearLayout>
