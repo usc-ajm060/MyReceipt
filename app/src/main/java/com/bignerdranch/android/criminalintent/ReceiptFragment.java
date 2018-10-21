@@ -48,7 +48,7 @@ public class ReceiptFragment extends Fragment {
     private EditText mShop;
     private EditText mComment;
     private Button mDateButton;
-    private CheckBox mSolvedCheckbox;
+    //private CheckBox mSolvedCheckbox;
     private Button mReportButton;
     private Button mSuspectButton;
     private ImageButton mPhotoButton;
@@ -147,15 +147,15 @@ public class ReceiptFragment extends Fragment {
             }
         });
 
-        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
-        mSolvedCheckbox.setChecked(mReceipt.isSolved());
-        mSolvedCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, 
-                    boolean isChecked) {
-                mReceipt.setSolved(isChecked);
-            }
-        });
+//        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+//        mSolvedCheckbox.setChecked(mReceipt.isSolved());
+//        mSolvedCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView,
+//                    boolean isChecked) {
+//                mReceipt.setSolved(isChecked);
+//            }
+//        });
 
         mReportButton = (Button) v.findViewById(R.id.receipt_report);
         mReportButton.setOnClickListener(new View.OnClickListener() {
