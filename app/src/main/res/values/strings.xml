@@ -2,10 +2,10 @@
     <string name="app_name">MyReceipt</string>
     <string name="receipt_title_hint">Enter a title for the receipt.</string>
     <string name="receipt_title_label">Title</string>
-    <string name="shop_hint">Enter a shop for the receipt.</string>
+    <string name="shop_hint">Enter a shop name.</string>
     <string name="shop">Shop name</string>
 
-    <string name="receipt_comment_hint">Enter a comment for the receipt.</string>
+    <string name="receipt_comment_hint">Enter a comment.</string>
     <string name="receipt_comment_label">Comments</string>
 
     <string name="receipt_details_label">Details</string>
