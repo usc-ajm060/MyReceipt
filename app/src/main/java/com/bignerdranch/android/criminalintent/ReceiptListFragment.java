@@ -138,6 +138,7 @@ public class ReceiptListFragment extends Fragment {
         private Receipt mReceipt;
 
         private TextView mTitleTextView;
+        //private TextView mShopTextView;
         private TextView mDateTextView;
         private ImageView mSolvedImageView;
 
@@ -146,6 +147,7 @@ public class ReceiptListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.receipt_title);
+            //mShopTextView = (TextView) itemView.findViewById(R.id.receipt_shop);
             mDateTextView = (TextView) itemView.findViewById(R.id.receipt_date);
             mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
         }
@@ -153,6 +155,7 @@ public class ReceiptListFragment extends Fragment {
         public void bind(Receipt receipt) {
             mReceipt = receipt;
             mTitleTextView.setText(mReceipt.getTitle());
+            //mShopTextView.setText(mReceipt.getShop());
             mDateTextView.setText(mReceipt.getDate().toString());
             mSolvedImageView.setVisibility(receipt.isSolved() ? View.VISIBLE : View.GONE);
         }
