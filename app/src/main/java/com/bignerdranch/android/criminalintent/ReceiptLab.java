@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.bignerdranch.android.criminalintent.database.ReceiptBaseHelper;
 import com.bignerdranch.android.criminalintent.database.ReceiptCursorWrapper;
+import com.bignerdranch.android.criminalintent.database.ReceiptDbSchema;
 import com.bignerdranch.android.criminalintent.database.ReceiptDbSchema.ReceiptTable;
 
 import java.io.File;
@@ -36,9 +37,14 @@ public class ReceiptLab {
 
     }
 
-    public void addCrime(Receipt c) {
+    public void addReceipt(Receipt c) {
         ContentValues values = getContentValues(c);
         mDatabase.insert(ReceiptTable.NAME, null, values);
+    }
+
+    public int deleteReceipt (UUID receiptID) {
+        String uuidString = receiptID.toString();
+        return (mDatabase.delete(ReceiptTable.NAME, ReceiptDbSchema.ReceiptTable.Cols.UUID + "= ?", new String[] {uuidString}));
     }
 
     public List<Receipt> getReceipts() {

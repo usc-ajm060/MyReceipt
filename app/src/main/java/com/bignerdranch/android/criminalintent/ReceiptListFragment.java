@@ -88,7 +88,7 @@ public class ReceiptListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.new_crime:
                 Receipt crime = new Receipt();
-                ReceiptLab.get(getActivity()).addCrime(crime);
+                ReceiptLab.get(getActivity()).addReceipt(crime);
                 Intent intent = ReceiptPagerActivity
                         .newIntent(getActivity(), crime.getId());
                 startActivity(intent);
@@ -132,7 +132,7 @@ public class ReceiptListFragment extends Fragment {
         updateSubtitle();
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder
+    private class ReceiptHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private Receipt mReceipt;
@@ -142,7 +142,7 @@ public class ReceiptListFragment extends Fragment {
         private TextView mDateTextView;
         private ImageView mSolvedImageView;
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
+        public ReceiptHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_receipt, parent, false));
             itemView.setOnClickListener(this);
 
@@ -167,7 +167,7 @@ public class ReceiptListFragment extends Fragment {
         }
     }
 
-    private class ReceiptAdapter extends RecyclerView.Adapter<CrimeHolder> {
+    private class ReceiptAdapter extends RecyclerView.Adapter<ReceiptHolder> {
 
         private List<Receipt> mCrimes;
 
@@ -176,13 +176,13 @@ public class ReceiptListFragment extends Fragment {
         }
 
         @Override
-        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ReceiptHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new CrimeHolder(layoutInflater, parent);
+            return new ReceiptHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
+        public void onBindViewHolder(ReceiptHolder holder, int position) {
             Receipt crime = mCrimes.get(position);
             holder.bind(crime);
         }
