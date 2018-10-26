@@ -38,7 +38,7 @@ public class ReceiptListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_receipt_list, container, false);
 
         mReceiptRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
+                .findViewById(R.id.receipt_recycler_view);
         mReceiptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (savedInstanceState != null) {
@@ -86,11 +86,11 @@ public class ReceiptListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_crime:
-                Receipt crime = new Receipt();
-                ReceiptLab.get(getActivity()).addReceipt(crime);
+            case R.id.new_receipt:
+                Receipt receipt = new Receipt();
+                ReceiptLab.get(getActivity()).addReceipt(receipt);
                 Intent intent = ReceiptPagerActivity
-                        .newIntent(getActivity(), crime.getId());
+                        .newIntent(getActivity(), receipt.getId());
                 startActivity(intent);
                 return true;
 
@@ -106,8 +106,8 @@ public class ReceiptListFragment extends Fragment {
 
     private void updateSubtitle() {
         ReceiptLab receiptLab = ReceiptLab.get(getActivity());
-        int crimeCount = receiptLab.getReceipts().size();
-        String subtitle = getString(R.string.subtitle_format, crimeCount);
+        int receiptCount = receiptLab.getReceipts().size();
+        String subtitle = getString(R.string.subtitle_format, receiptCount);
 
         if (!mSubtitleVisible) {
             subtitle = null;
@@ -169,10 +169,10 @@ public class ReceiptListFragment extends Fragment {
 
     private class ReceiptAdapter extends RecyclerView.Adapter<ReceiptHolder> {
 
-        private List<Receipt> mCrimes;
+        private List<Receipt> mReceipts;
 
-        public ReceiptAdapter(List<Receipt> crimes) {
-            mCrimes = crimes;
+        public ReceiptAdapter(List<Receipt> receipts) {
+            mReceipts = receipts;
         }
 
         @Override
@@ -183,17 +183,17 @@ public class ReceiptListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ReceiptHolder holder, int position) {
-            Receipt crime = mCrimes.get(position);
-            holder.bind(crime);
+            Receipt receipt = mReceipts.get(position);
+            holder.bind(receipt);
         }
 
         @Override
         public int getItemCount() {
-            return mCrimes.size();
+            return mReceipts.size();
         }
 
-        public void setReceipts(List<Receipt> crimes) {
-            mCrimes = crimes;
+        public void setReceipts(List<Receipt> receipts) {
+            mReceipts = receipts;
         }
     }
 }

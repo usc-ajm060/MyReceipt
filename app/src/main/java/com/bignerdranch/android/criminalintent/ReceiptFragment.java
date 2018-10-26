@@ -51,7 +51,7 @@ public class ReceiptFragment extends Fragment {
     //private CheckBox mSolvedCheckbox;
     private Button mReportButton;
     private Button mSuspectButton;
-    //private Button mDeleteButton;
+    private Button mDeleteButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
@@ -97,7 +97,7 @@ public class ReceiptFragment extends Fragment {
             }
         });
 
-        mShop = (EditText) v.findViewById(R.id.receipt_title);
+        mShop = (EditText) v.findViewById(R.id.shop_name);
         mShop.setText(mReceipt.getTitle());
         mShop.addTextChangedListener(new TextWatcher() {
             @Override
@@ -116,7 +116,7 @@ public class ReceiptFragment extends Fragment {
             }
         });
 
-        mComment = (EditText) v.findViewById(R.id.receipt_title);
+        mComment = (EditText) v.findViewById(R.id.comment);
         mComment.setText(mReceipt.getTitle());
         mComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,13 +220,13 @@ public class ReceiptFragment extends Fragment {
         mPhotoView = (ImageView) v.findViewById(R.id.receipt_photo);
         updatePhotoView();
 
-//        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
-//        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
-//                    getActivity().finish();
-//                } }
-//        });
+        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
+                    getActivity().finish();
+                } }
+        });
 
         return v;
     }

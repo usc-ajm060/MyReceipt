@@ -18,16 +18,16 @@ import java.util.UUID;
 import static com.bignerdranch.android.criminalintent.database.ReceiptDbSchema.ReceiptTable.Cols.*;
 
 public class ReceiptLab {
-    private static ReceiptLab sCrimeLab;
+    private static ReceiptLab sReceiptLab;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     public static ReceiptLab get(Context context) {
-        if (sCrimeLab == null) {
-            sCrimeLab = new ReceiptLab(context);
+        if (sReceiptLab == null) {
+            sReceiptLab = new ReceiptLab(context);
         }
 
-        return sCrimeLab;
+        return sReceiptLab;
     }
 
     private ReceiptLab(Context context) {
@@ -48,22 +48,22 @@ public class ReceiptLab {
     }
 
     public List<Receipt> getReceipts() {
-        List<Receipt> crimes = new ArrayList<>();
-        ReceiptCursorWrapper cursor = queryCrimes(null, null);
+        List<Receipt> receipts = new ArrayList<>();
+        ReceiptCursorWrapper cursor = queryReceipts(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                crimes.add(cursor.getReceipt());
+                receipts.add(cursor.getReceipt());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        return crimes;
+        return receipts;
     }
 
     public Receipt getReceipt(UUID id) {
-        ReceiptCursorWrapper cursor = queryCrimes(
+        ReceiptCursorWrapper cursor = queryReceipts(
                 ReceiptTable.Cols.UUID + " = ?",
                 new String[]{id.toString()}
         );
@@ -78,20 +78,20 @@ public class ReceiptLab {
         }
     }
 
-    public File getPhotoFile(Receipt crime) {
+    public File getPhotoFile(Receipt receipt) {
         File filesDir = mContext.getFilesDir();
-        return new File(filesDir, crime.getPhotoFilename());
+        return new File(filesDir, receipt.getPhotoFilename());
     }
 
-    public void updateReceipt(Receipt crime) {
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+    public void updateReceipt(Receipt receipt) {
+        String uuidString = receipt.getId().toString();
+        ContentValues values = getContentValues(receipt);
         mDatabase.update(ReceiptTable.NAME, values,
                 ReceiptTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
     }
 
-    private ReceiptCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
+    private ReceiptCursorWrapper queryReceipts(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 ReceiptTable.NAME,
                 null, // Columns - null selects all columns
@@ -104,14 +104,14 @@ public class ReceiptLab {
         return new ReceiptCursorWrapper(cursor);
     }
 
-    private static ContentValues getContentValues(Receipt crime) {
+    private static ContentValues getContentValues(Receipt receipt) {
         ContentValues values = new ContentValues();
-        values.put(UUID, crime.getId().toString());
-        values.put(TITLE, crime.getTitle());
-        values.put(SHOP, crime.getShop());
-        values.put(DATE, crime.getDate().getTime());
-        values.put(SOLVED, crime.isSolved() ? 1 : 0);
-        values.put(ReceiptTable.Cols.SUSPECT, crime.getSuspect());
+        values.put(UUID, receipt.getId().toString());
+        values.put(TITLE, receipt.getTitle());
+        values.put(SHOP, receipt.getShop());
+        values.put(DATE, receipt.getDate().getTime());
+        values.put(SOLVED, receipt.isSolved() ? 1 : 0);
+        values.put(ReceiptTable.Cols.SUSPECT, receipt.getSuspect());
 
         return values;
     }

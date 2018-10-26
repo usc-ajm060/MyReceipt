@@ -28,9 +28,9 @@ public class ReceiptPagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Receipt> mReceipts;
 
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
+    public static Intent newIntent(Context packageContext, UUID receiptId) {
         Intent intent = new Intent(packageContext, ReceiptPagerActivity.class);
-        intent.putExtra(EXTRA_RECEIPT_ID, crimeId);
+        intent.putExtra(EXTRA_RECEIPT_ID, receiptId);
         return intent;
     }
 
@@ -40,7 +40,7 @@ public class ReceiptPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receipt_pager);
 
 
-        UUID crimeId = (UUID) getIntent()
+        UUID receiptId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_RECEIPT_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.receipt_view_pager);
@@ -51,8 +51,8 @@ public class ReceiptPagerActivity extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
-                Receipt crime = mReceipts.get(position);
-                return ReceiptFragment.newInstance(crime.getId());
+                Receipt receipt = mReceipts.get(position);
+                return ReceiptFragment.newInstance(receipt.getId());
             }
 
             @Override
@@ -62,7 +62,7 @@ public class ReceiptPagerActivity extends AppCompatActivity {
         });
 
         for (int i = 0; i < mReceipts.size(); i++) {
-            if (mReceipts.get(i).getId().equals(crimeId)) {
+            if (mReceipts.get(i).getId().equals(receiptId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }
