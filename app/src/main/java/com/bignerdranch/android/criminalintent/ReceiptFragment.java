@@ -51,7 +51,7 @@ public class ReceiptFragment extends Fragment {
     //private CheckBox mSolvedCheckbox;
     private Button mReportButton;
     private Button mSuspectButton;
-    private Button mDeleteButton;
+    //private Button mDeleteButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
@@ -220,13 +220,13 @@ public class ReceiptFragment extends Fragment {
         mPhotoView = (ImageView) v.findViewById(R.id.receipt_photo);
         updatePhotoView();
 
-        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
-                    getActivity().finish();
-                } }
-        });
+//        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
+//        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
+//                    getActivity().finish();
+//                } }
+//        });
 
         return v;
     }
