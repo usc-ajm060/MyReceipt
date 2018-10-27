@@ -63,6 +63,17 @@
                 android:hint="@string/receipt_shop_hint" />
 
 
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/receipt_comment_label" />
+
+            <EditText
+                android:id="@+id/receipt_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/receipt_comment_hint" />
         </LinearLayout>
     </LinearLayout>
 

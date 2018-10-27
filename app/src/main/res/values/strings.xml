@@ -5,6 +5,7 @@
     <string name="receipt_shop_hint">Enter a shop for the receipt.</string>
     <string name="receipt_shop_label">Shop</string>
 
+
     <string name="Delete">Delete</string>
     <string name="receipt_comment_hint">Enter a comment.</string>
     <string name="receipt_comment_label">Comments</string>

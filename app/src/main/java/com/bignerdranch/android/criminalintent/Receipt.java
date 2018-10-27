@@ -8,6 +8,7 @@ public class Receipt {
     private UUID mId;
     private String mTitle;
     private String mShop;
+    private String mComment;
     private Date mDate;
     private boolean mSolved;
     private String mSuspect;
@@ -44,6 +45,15 @@ public class Receipt {
     public void setShop(String shop) {
 
         mShop = shop;
+    }
+    public String getComment() {
+
+        return mComment;
+    }
+
+    public void setComment(String comment) {
+
+        mComment = comment;
     }
 
     public Date getDate() {

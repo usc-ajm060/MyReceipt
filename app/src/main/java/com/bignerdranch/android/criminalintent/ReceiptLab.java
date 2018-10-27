@@ -109,6 +109,7 @@ public class ReceiptLab {
         values.put(UUID, receipt.getId().toString());
         values.put(TITLE, receipt.getTitle());
         values.put(SHOP, receipt.getShop());
+        values.put(COMMENT, receipt.getComment());
         values.put(DATE, receipt.getDate().getTime());
         values.put(SOLVED, receipt.isSolved() ? 1 : 0);
         values.put(ReceiptTable.Cols.SUSPECT, receipt.getSuspect());
