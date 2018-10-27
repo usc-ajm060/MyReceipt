@@ -46,7 +46,6 @@ public class Receipt {
         mShop = shop;
     }
 
-
     public Date getDate() {
 
         return mDate;

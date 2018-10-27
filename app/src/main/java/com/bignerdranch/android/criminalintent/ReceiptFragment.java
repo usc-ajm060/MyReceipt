@@ -46,7 +46,7 @@ public class ReceiptFragment extends Fragment {
     private File mPhotoFile;
     private EditText mTitleField;
     private EditText mShopField;
-    private EditText mComment;
+    //private EditText mComment;
     private Button mDateButton;
     //private CheckBox mSolvedCheckbox;
     private Button mReportButton;
@@ -83,7 +83,6 @@ public class ReceiptFragment extends Fragment {
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -97,8 +96,8 @@ public class ReceiptFragment extends Fragment {
             }
         });
 
-        mShopField = (EditText) v.findViewById(R.id.shop_name);
-        mShopField.setText(mReceipt.getTitle());
+        mShopField = (EditText) v.findViewById(R.id.receipt_shop);
+        mShopField.setText(mReceipt.getShop());
         mShopField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,26 +106,7 @@ public class ReceiptFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mReceipt.setTitle(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        mComment = (EditText) v.findViewById(R.id.comment);
-        mComment.setText(mReceipt.getTitle());
-        mComment.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mReceipt.setTitle(s.toString());
+                mReceipt.setShop(s.toString());
             }
 
             @Override
