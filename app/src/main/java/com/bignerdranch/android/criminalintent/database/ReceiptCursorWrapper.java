@@ -24,7 +24,7 @@ public class ReceiptCursorWrapper extends CursorWrapper {
         String comment = getString(getColumnIndex(Cols.COMMENT));
         long date = getLong(getColumnIndex(Cols.DATE));
         int isSolved = getInt(getColumnIndex(Cols.SOLVED));
-        String suspect = getString(getColumnIndex(ReceiptTable.Cols.SUSPECT));
+        String contact = getString(getColumnIndex(Cols.CONTACT));
 
         Receipt receipt = new Receipt(UUID.fromString(uuidString));
         receipt.setTitle(title);
@@ -32,7 +32,7 @@ public class ReceiptCursorWrapper extends CursorWrapper {
         receipt.setComment(comment);
         receipt.setDate(new Date(date));
         receipt.setSolved(isSolved != 0);
-        receipt.setSuspect(suspect);
+        receipt.setContact(contact);
 
         return receipt;
     }

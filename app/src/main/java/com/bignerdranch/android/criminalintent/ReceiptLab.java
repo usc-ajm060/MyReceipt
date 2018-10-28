@@ -42,10 +42,16 @@ public class ReceiptLab {
         mDatabase.insert(ReceiptTable.NAME, null, values);
     }
 
-    public int deleteReceipt (UUID receiptID) {
-        String uuidString = receiptID.toString();
-        return (mDatabase.delete(ReceiptTable.NAME, ReceiptDbSchema.ReceiptTable.Cols.UUID + "= ?", new String[] {uuidString}));
-    }
+//    public void deleteReceipt (UUID receiptID)
+//    {
+//        String uuidString = receiptID.toString();
+//        mDatabase.delete(ReceiptTable.NAME, ReceiptTable.Cols.UUID + " = ?", new String[] (uuidString));
+//    }
+
+//    public int deleteReceipt (UUID receiptID) {
+//        String uuidString = receiptID.toString();
+//        return (mDatabase.delete(ReceiptTable.NAME, ReceiptDbSchema.ReceiptTable.Cols.UUID + "= ?", new String[] {uuidString}));
+//    }
 
     public List<Receipt> getReceipts() {
         List<Receipt> receipts = new ArrayList<>();
@@ -112,7 +118,7 @@ public class ReceiptLab {
         values.put(COMMENT, receipt.getComment());
         values.put(DATE, receipt.getDate().getTime());
         values.put(SOLVED, receipt.isSolved() ? 1 : 0);
-        values.put(ReceiptTable.Cols.SUSPECT, receipt.getSuspect());
+        values.put(ReceiptTable.Cols.CONTACT, receipt.getContact());
 
         return values;
     }

@@ -11,7 +11,7 @@ public class Receipt {
     private String mComment;
     private Date mDate;
     private boolean mSolved;
-    private String mSuspect;
+    private String mContact;
 
     public Receipt() {
         this(UUID.randomUUID());
@@ -76,14 +76,14 @@ public class Receipt {
         mSolved = solved;
     }
 
-    public String getSuspect() {
+    public String getContact() {
 
-        return mSuspect;
+        return mContact;
     }
 
-    public void setSuspect(String suspect) {
+    public void setContact(String contact) {
 
-        mSuspect = suspect;
+        mContact = contact;
     }
 
     public String getPhotoFilename() {

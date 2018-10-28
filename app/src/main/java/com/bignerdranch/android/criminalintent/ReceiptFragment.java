@@ -20,8 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,8 +28,6 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import static android.widget.CompoundButton.*;
 
 public class ReceiptFragment extends Fragment {
 
@@ -50,8 +46,8 @@ public class ReceiptFragment extends Fragment {
     private Button mDateButton;
     //private CheckBox mSolvedCheckbox;
     private Button mReportButton;
-    private Button mSuspectButton;
-    private Button mDeleteButton;
+    private Button mContactButton;
+    //private Button mDeleteButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
@@ -171,20 +167,20 @@ public class ReceiptFragment extends Fragment {
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
-        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
-        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+        mContactButton = (Button) v.findViewById(R.id.crime_contact);
+        mContactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
-        if (mReceipt.getSuspect() != null) {
-            mSuspectButton.setText(mReceipt.getSuspect());
+        if (mReceipt.getContact() != null) {
+            mContactButton.setText(mReceipt.getContact());
         }
 
         PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager.resolveActivity(pickContact,
                 PackageManager.MATCH_DEFAULT_ONLY) == null) {
-            mSuspectButton.setEnabled(false);
+            mContactButton.setEnabled(false);
         }
 
         mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
@@ -218,13 +214,13 @@ public class ReceiptFragment extends Fragment {
         mPhotoView = (ImageView) v.findViewById(R.id.receipt_photo);
         updatePhotoView();
 
-        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
-                    getActivity().finish();
-                } }
-        });
+//        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
+//        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (ReceiptLab.get(getActivity()).deleteReceipt(mReceipt.getId()) > 0){
+//                    getActivity().finish();
+//                } }
+//        });
 
         return v;
     }
@@ -267,9 +263,9 @@ public class ReceiptFragment extends Fragment {
                 // Pull out the first column of the first row of data -
                 // that is your suspect's name.
                 c.moveToFirst();
-                String suspect = c.getString(0);
-                mReceipt.setSuspect(suspect);
-                mSuspectButton.setText(suspect);
+                String contact = c.getString(0);
+                mReceipt.setContact(contact);
+                mContactButton.setText(contact);
             } finally {
                 c.close();
             }
@@ -298,14 +294,14 @@ public class ReceiptFragment extends Fragment {
         }
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat, mReceipt.getDate()).toString();
-        String suspect = mReceipt.getSuspect();
-        if (suspect == null) {
-            suspect = getString(R.string.crime_report_no_suspect);
+        String contact = mReceipt.getContact();
+        if (contact == null) {
+            contact = getString(R.string.crime_report_no_contact);
         } else {
-            suspect = getString(R.string.crime_report_suspect, suspect);
+            contact = getString(R.string.crime_report_contact, contact);
         }
         String report = getString(R.string.receipt_report,
-                mReceipt.getTitle(), dateString, solvedString, suspect);
+                mReceipt.getTitle(), dateString, solvedString, contact);
         return report;
     }
 
