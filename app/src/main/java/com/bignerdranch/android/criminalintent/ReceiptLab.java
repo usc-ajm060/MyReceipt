@@ -48,10 +48,10 @@ public class ReceiptLab {
 //        mDatabase.delete(ReceiptTable.NAME, ReceiptTable.Cols.UUID + " = ?", new String[] (uuidString));
 //    }
 
-//    public int deleteReceipt (UUID receiptID) {
-//        String uuidString = receiptID.toString();
-//        return (mDatabase.delete(ReceiptTable.NAME, ReceiptDbSchema.ReceiptTable.Cols.UUID + "= ?", new String[] {uuidString}));
-//    }
+    public int deleteReceipt (UUID receiptID) {
+        String uuidString = receiptID.toString();
+        return (mDatabase.delete(ReceiptTable.NAME, ReceiptDbSchema.ReceiptTable.Cols.UUID + "= ?", new String[] {uuidString}));
+    }
 
     public List<Receipt> getReceipts() {
         List<Receipt> receipts = new ArrayList<>();
