@@ -23,7 +23,7 @@
     The crime was discovered on %2$s. %3$s, and %4$s
   </string>
     <string name="crime_report_solved">The case is Closed</string>
-    <string name="crime_report_unsolved">The case is not solved</string>
+    <string name="crime_report_unsolved">The case is not Open</string>
     <string name="crime_report_no_contact">there is no contact.</string>
     <string name="crime_report_contact">the contact is %s.</string>
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
